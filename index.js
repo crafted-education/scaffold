@@ -1,0 +1,1 @@
+module.exports.Scaffold = require('./lib/Scaffold.js');
