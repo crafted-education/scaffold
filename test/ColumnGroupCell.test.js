@@ -571,6 +571,51 @@ describe('ColumnGroupCell', function() {
       assert(!canAddColumn);
     });
 
+    it('should return false if there is no room for a new column - 2', function() {
+      
+      //Arrange
+      var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
+      var cell = scaffold.createColumnGroupCell([
+          scaffold.createColumn(4, [
+            scaffold.createBlockCell({"id": 3})
+          ]),
+          scaffold.createColumn(4, [
+            scaffold.createBlockCell({"id": 3})
+          ]),
+          scaffold.createColumn(4, [
+            scaffold.createBlockCell({"id": 3})
+          ])
+        ]);
+        
+      //Act
+      var canAddColumn = cell.canAddColumn();
+
+      //Assert
+      assert(!canAddColumn);
+    });
+    
+    it('should return false if there is no room for a new column - with empty column', function() {
+      
+      //Arrange
+      var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
+      var cell = scaffold.createColumnGroupCell([
+           scaffold.createColumn(6, [
+            scaffold.createBlockCell({"id": 3})
+          ]),
+          scaffold.createColumn(6, [
+            scaffold.createBlockCell({"id": 3})
+          ])
+        ]);
+        
+        cell.addChildColumn(scaffold.createColumn(12, []));
+        
+      //Act
+      var canAddColumn = cell.canAddColumn();
+
+      //Assert
+      assert(!canAddColumn);
+    });
+
   });
   
   describe('isEmpty', function() {
