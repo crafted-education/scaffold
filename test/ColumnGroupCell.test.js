@@ -696,7 +696,7 @@ describe('ColumnGroupCell', function() {
 
   describe('resizeColumnsForNewColumn', function() {
 	  
-    it('should size the cells appropriately', function() {
+    it('should size the cells appropriately for a new column with a block cell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
@@ -704,6 +704,24 @@ describe('ColumnGroupCell', function() {
       var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
       var newColumn = scaffold.createColumn(12, [scaffold.createBlockCell({"id": 3})]);
+        
+      //Act
+      cell.resizeColumnsForNewColumn(newColumn, 1);
+
+      //Assert
+      assert.strictEqual(columnA.getWidth(), 4);
+      assert.strictEqual(columnB.getWidth(), 4);
+      assert.strictEqual(newColumn.getWidth(), 4);
+    });
+
+    it('should size the cells appropriately for a new empty column', function() {
+      
+      //Arrange
+      var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
+      var columnA = scaffold.createColumn(8, [scaffold.createBlockCell({"id": 1})]);
+      var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 2})]);
+      var cell = scaffold.createColumnGroupCell([columnA, columnB]);
+      var newColumn = scaffold.createColumn(12, []);
         
       //Act
       cell.resizeColumnsForNewColumn(newColumn, 1);
