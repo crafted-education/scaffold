@@ -327,7 +327,7 @@ describe('ColumnGroupCell', function() {
       
     });
     
-    it('should not remove anything if the cell cannot be found', function() {
+    it('should not remove anything if the column cannot be found', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
@@ -357,6 +357,41 @@ describe('ColumnGroupCell', function() {
       assert.strictEqual(cellColumns[2].getId(), columnId3);
       assert.strictEqual(cellColumns[2].getWidth(), 4);
       
+    });
+
+    it('should handle having only 1 column left appropriately', function() {
+      //If a column is removed from a column group leaving only a single column,
+      //all of the cells from that column should be moved to the column group's 
+      //parent column and the column group and remaining child column should be deleted
+      
+      //Arrange
+      var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
+      var columns = [
+        scaffold.createColumn(4, [scaffold.createBlockCell({"id":1})]),
+        scaffold.createColumn(4, [scaffold.createBlockCell({"id":2})])
+      ];
+      var cell = scaffold.createColumnGroupCell(columns);
+      var parentColumn = scaffold.createColumn(4, [
+        scaffold.createBlockCell({"id":3}),
+        cell,
+        scaffold.createBlockCell({"id":4})
+      ]);
+     
+      var columnId1 = columns[0].getId();
+      var columnId2 = columns[1].getId();
+      
+      //Act
+      cell.removeChildColumn(columns[1]);
+     
+      //Assert
+      var cells = parentColumn.getChildCells();
+      
+      assert(!scaffold.getCellById(cell.getId())); //Should be deleted
+      assert(!scaffold.getColumnById(columnId1)); //Should be deleted
+      assert.strictEqual(cells.length, 3);
+      assert.strictEqual(cells[0].getChildBlock().id, 3);
+      assert.strictEqual(cells[1].getChildBlock().id, 1);
+      assert.strictEqual(cells[2].getChildBlock().id, 4);
     });
 
   });

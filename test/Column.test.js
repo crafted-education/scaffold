@@ -111,7 +111,7 @@ describe('Column', function() {
   });
   
   
-  describe('deleteColumn', function() {
+  describe('delete', function() {
 	  
     it('should delete the column, and any descendants', function() {
       
