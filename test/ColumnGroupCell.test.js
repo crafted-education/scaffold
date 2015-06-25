@@ -808,8 +808,8 @@ describe('ColumnGroupCell', function() {
       cell.setWidth(12);
 
       //Assert
-      assert.strictEqual(columnA.getWidth(), 8);
-      assert.strictEqual(columnB.getWidth(), 4);
+      assert.strictEqual(columnA.getWidth(), 6);
+      assert.strictEqual(columnB.getWidth(), 6);
     });
     
     it('should decrease the width in the appropriate column', function() {
@@ -856,7 +856,7 @@ describe('ColumnGroupCell', function() {
       assert.throws(function() {
         //Act
         cell.setWidth(4);
-      }, /The column group cannot be resized to the new width/);
+      }, /Invalid width for a column group with three columns: 4/);
     });
   });
 
