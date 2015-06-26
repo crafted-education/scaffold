@@ -241,7 +241,7 @@ describe('ColumnGroupCell', function() {
   
 
 
-  describe('removeColumnFromCell', function() {
+  describe('removeChildColumn', function() {
 	  
     it('should remove a column in the middle', function() {
       
@@ -394,6 +394,37 @@ describe('ColumnGroupCell', function() {
       assert.strictEqual(cells[2].getChildBlock().id, 4);
     });
 
+    it('should delete itself if it is empty after removing the column', function() {
+      //If a column is removed and the only columns left are empty
+      //then delete the whole column group
+      
+      //Arrange
+      var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
+      var columns = [
+        scaffold.createColumn(4, [scaffold.createBlockCell({"id":1})]),
+        scaffold.createColumn(4, [])
+      ];
+      var cell = scaffold.createColumnGroupCell(columns);
+      var parentColumn = scaffold.createColumn(4, [
+        scaffold.createBlockCell({"id":2}),
+        cell,
+        scaffold.createBlockCell({"id":3})
+      ]);
+     
+      var columnId2 = columns[1].getId();
+      
+      //Act
+      cell.removeChildColumn(columns[0]);
+     
+      //Assert
+      var cells = parentColumn.getChildCells();
+      
+      assert(!scaffold.getCellById(cell.getId())); //Should be deleted
+      assert(!scaffold.getColumnById(columnId2)); //Should be deleted
+      assert.strictEqual(cells.length, 2);
+      assert.strictEqual(cells[0].getChildBlock().id, 2);
+      assert.strictEqual(cells[1].getChildBlock().id, 3);
+    });
   });
 
   describe('getPossibleFreeSpace', function() {
