@@ -1,6 +1,6 @@
 var assert = require("assert");
 var Scaffold = require('../lib/Scaffold.js');
-var BlockCell = require('../lib/BlockCell.js');
+var ContentCell = require('../lib/ContentCell.js');
 var ColumnGroupCell = require('../lib/ColumnGroupCell.js');
 var Column = require('../lib/Column.js');
 
@@ -37,8 +37,8 @@ describe('Scaffold', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var block = { "id": "123" };
-      var cell = scaffold.createBlockCell(block);
+      var content = { "id": "123" };
+      var cell = scaffold.createContentCell(content);
       
       //Act
       var retrievedCell = scaffold.getCellById(cell.getId());
@@ -52,8 +52,8 @@ describe('Scaffold', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var block = { "id": "123" };
-      var cell = scaffold.createBlockCell(block);
+      var content = { "id": "123" };
+      var cell = scaffold.createContentCell(content);
       
       //Act
       var retrievedCell = scaffold.getCellById("doesNotExist");
@@ -64,17 +64,17 @@ describe('Scaffold', function() {
    });
  
  
-   describe('getCellByBlockId', function() {
+   describe('getCellByContentId', function() {
 	  
     it('should return the correct cell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var block = { "id": "123" };
-      var cell = scaffold.createBlockCell(block);
+      var content = { "id": "123" };
+      var cell = scaffold.createContentCell(content);
       
       //Act
-      var retrievedCell = scaffold.getCellByBlockId("123");
+      var retrievedCell = scaffold.getCellByContentId("123");
       
       //Assert
       assert(retrievedCell);
@@ -85,11 +85,11 @@ describe('Scaffold', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var block = { "id": "123" };
-      var cell = scaffold.createBlockCell(block);
+      var content = { "id": "123" };
+      var cell = scaffold.createContentCell(content);
       
       //Act
-      var retrievedCell = scaffold.getCellByBlockId("doesNotExist");
+      var retrievedCell = scaffold.getCellByContentId("doesNotExist");
       
       //Assert
       assert.strictEqual(null, retrievedCell);
@@ -97,47 +97,47 @@ describe('Scaffold', function() {
    });
  
 
-  describe('createBlockCell', function() {
+  describe('createContentCell', function() {
 	  
     it('should return a cell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var block = { "id": "123" };
+      var content = { "id": "123" };
       
       //Act
-      var cell = scaffold.createBlockCell(block);
+      var cell = scaffold.createContentCell(content);
       
       //Assert
       assert(cell);
-      assert(cell instanceof BlockCell);
-      assert.strictEqual(block, cell.getChildBlock());
+      assert(cell instanceof ContentCell);
+      assert.strictEqual(content, cell.getChildContent());
     });
 	
-    it('should throw an error on a null block', function() {
+    it('should throw an error on a null content', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var block = null;
+      var content = null;
       
       //Assert
       assert.throws(function() {
         //Act
-        scaffold.createBlockCell(block);
-      }, /Cannot create a block cell for a null block/);
+        scaffold.createContentCell(content);
+      }, /Cannot create a content cell for a null content/);
     });
 
-    it('should throw an error on a block with no id', function() {
+    it('should throw an error on a content with no id', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var block = {};
+      var content = {};
       
       //Assert
       assert.throws(function() {
         //Act
-        scaffold.createBlockCell(block);
-      }, /Cannot create a block cell for a block that has no id/);
+        scaffold.createContentCell(content);
+      }, /Cannot create a content cell for a content that has no id/);
     });
 
   });
@@ -197,8 +197,8 @@ describe('Scaffold', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var block = { "id": "123" };
-      var cell = scaffold.createBlockCell(block);
+      var content = { "id": "123" };
+      var cell = scaffold.createContentCell(content);
       var column = scaffold.createColumn(12, [cell]);
       
       //Act
@@ -213,8 +213,8 @@ describe('Scaffold', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var block = { "id": "123" };
-      var cell = scaffold.createBlockCell(block);
+      var content = { "id": "123" };
+      var cell = scaffold.createContentCell(content);
       scaffold.createColumn(12, [cell]);
       
       //Act
@@ -233,8 +233,8 @@ describe('Scaffold', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var cells = [
-        scaffold.createBlockCell({ "id": 1 }),
-        scaffold.createBlockCell({ "id": 2 })
+        scaffold.createContentCell({ "id": 1 }),
+        scaffold.createContentCell({ "id": 2 })
       ];
       
       //Act
@@ -256,13 +256,13 @@ describe('Scaffold', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columnACells = [
-        scaffold.createBlockCell({"id": 1}),
-        scaffold.createBlockCell({"id": 2})
+        scaffold.createContentCell({"id": 1}),
+        scaffold.createContentCell({"id": 2})
       ];
       var columnA = scaffold.createColumn(6, columnACells);
       var columnBCells = [
-        scaffold.createBlockCell({"id": 3}),
-        scaffold.createBlockCell({"id": 4})
+        scaffold.createContentCell({"id": 3}),
+        scaffold.createContentCell({"id": 4})
       ];
       var columnB = scaffold.createColumn(6, columnBCells);
 
@@ -273,14 +273,14 @@ describe('Scaffold', function() {
       var updatedColumnACells = columnA.getChildCells();
       assert(updatedColumnACells);
       assert.strictEqual(updatedColumnACells.length, 1);
-      assert.strictEqual(updatedColumnACells[0].getChildBlock().id, 1);
+      assert.strictEqual(updatedColumnACells[0].getChildContent().id, 1);
 
       var updatedColumnBCells = columnB.getChildCells();
       assert(updatedColumnBCells);
       assert.strictEqual(updatedColumnBCells.length, 3);
-      assert.strictEqual(updatedColumnBCells[0].getChildBlock().id, 3);
-      assert.strictEqual(updatedColumnBCells[1].getChildBlock().id, 2);
-      assert.strictEqual(updatedColumnBCells[2].getChildBlock().id, 4);
+      assert.strictEqual(updatedColumnBCells[0].getChildContent().id, 3);
+      assert.strictEqual(updatedColumnBCells[1].getChildContent().id, 2);
+      assert.strictEqual(updatedColumnBCells[2].getChildContent().id, 4);
 
       
     });
@@ -291,13 +291,13 @@ describe('Scaffold', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columnACells = [
-        scaffold.createBlockCell({"id": 1}),
-        scaffold.createBlockCell({"id": 2})
+        scaffold.createContentCell({"id": 1}),
+        scaffold.createContentCell({"id": 2})
       ];
       var columnA = scaffold.createColumn(6, columnACells);
       var columnBCells = [
-        scaffold.createBlockCell({"id": 3}),
-        scaffold.createBlockCell({"id": 4})
+        scaffold.createContentCell({"id": 3}),
+        scaffold.createContentCell({"id": 4})
       ];
       var columnB = scaffold.createColumn(6, columnBCells);
 
@@ -308,14 +308,14 @@ describe('Scaffold', function() {
       var updatedColumnACells = columnA.getChildCells();
       assert(updatedColumnACells);
       assert.strictEqual(updatedColumnACells.length, 1);
-      assert.strictEqual(updatedColumnACells[0].getChildBlock().id, 1);
+      assert.strictEqual(updatedColumnACells[0].getChildContent().id, 1);
 
       var updatedColumnBCells = columnB.getChildCells();
       assert(updatedColumnBCells);
       assert.strictEqual(updatedColumnBCells.length, 3);
-      assert.strictEqual(updatedColumnBCells[0].getChildBlock().id, 3);
-      assert.strictEqual(updatedColumnBCells[1].getChildBlock().id, 4);
-      assert.strictEqual(updatedColumnBCells[2].getChildBlock().id, 2);
+      assert.strictEqual(updatedColumnBCells[0].getChildContent().id, 3);
+      assert.strictEqual(updatedColumnBCells[1].getChildContent().id, 4);
+      assert.strictEqual(updatedColumnBCells[2].getChildContent().id, 2);
 
       
     });
@@ -325,10 +325,10 @@ describe('Scaffold', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columnCells = [
-        scaffold.createBlockCell({"id": 1}),
-        scaffold.createBlockCell({"id": 2}),
-        scaffold.createBlockCell({"id": 3}),
-        scaffold.createBlockCell({"id": 4})
+        scaffold.createContentCell({"id": 1}),
+        scaffold.createContentCell({"id": 2}),
+        scaffold.createContentCell({"id": 3}),
+        scaffold.createContentCell({"id": 4})
      ];
       var column = scaffold.createColumn(12, columnCells);
 
@@ -339,10 +339,10 @@ describe('Scaffold', function() {
       var updatedColumnCells = column.getChildCells();
       assert(updatedColumnCells);
       assert.strictEqual(updatedColumnCells.length, 4);
-      assert.strictEqual(updatedColumnCells[0].getChildBlock().id, 1);
-      assert.strictEqual(updatedColumnCells[1].getChildBlock().id, 3);
-      assert.strictEqual(updatedColumnCells[2].getChildBlock().id, 2);
-      assert.strictEqual(updatedColumnCells[3].getChildBlock().id, 4);
+      assert.strictEqual(updatedColumnCells[0].getChildContent().id, 1);
+      assert.strictEqual(updatedColumnCells[1].getChildContent().id, 3);
+      assert.strictEqual(updatedColumnCells[2].getChildContent().id, 2);
+      assert.strictEqual(updatedColumnCells[3].getChildContent().id, 4);
 
       
     });
@@ -356,13 +356,13 @@ describe('Scaffold', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var cellAColumns = [
-        scaffold.createColumn(8, [scaffold.createBlockCell({"id": 1})]),
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id": 2})])
+        scaffold.createColumn(8, [scaffold.createContentCell({"id": 1})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({"id": 2})])
       ];
       var cellA = scaffold.createColumnGroupCell(cellAColumns);
       var cellBColumns = [
-        scaffold.createColumn(8, [scaffold.createBlockCell({"id": 3})]),
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id": 4})])
+        scaffold.createColumn(8, [scaffold.createContentCell({"id": 3})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({"id": 4})])
       ];
       var cellB = scaffold.createColumnGroupCell(cellBColumns);
       
@@ -392,31 +392,31 @@ describe('Scaffold', function() {
   });
   
   
-  describe('canReplaceBlockWithColumns', function() {
+  describe('canReplaceContentWithColumns', function() {
 	  
-    it('should return true when the block can be replaced', function() {
+    it('should return true when the content can be replaced', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var cell = scaffold.createBlockCell({"id": 1});
+      var cell = scaffold.createContentCell({"id": 1});
       var column = scaffold.createColumn(8, [cell]);
         
       //Act
-      var canReplace = scaffold.canReplaceBlockWithColumns(cell);
+      var canReplace = scaffold.canReplaceContentWithColumns(cell);
 
       //Assert
       assert(canReplace);
     });
 
-    it('should return false when the block cannot be replaced', function() {
+    it('should return false when the content cannot be replaced', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var cell = scaffold.createBlockCell({"id": 1});
+      var cell = scaffold.createContentCell({"id": 1});
       var column = scaffold.createColumn(6, [cell]);
         
       //Act
-      var canReplace = scaffold.canReplaceBlockWithColumns(cell);
+      var canReplace = scaffold.canReplaceContentWithColumns(cell);
 
       //Assert
       assert(!canReplace);
@@ -424,17 +424,17 @@ describe('Scaffold', function() {
 
   });
 
-  describe('replaceBlockWithColumns', function() {
+  describe('replaceContentWithColumns', function() {
 	  
-    it('should replace the block with columns and put the block in the left column', function() {
+    it('should replace the content with columns and put the content in the left column', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var cell = scaffold.createBlockCell({"id": 1});
+      var cell = scaffold.createContentCell({"id": 1});
       var column = scaffold.createColumn(8, [cell]);
         
       //Act
-      scaffold.replaceBlockWithColumns(cell);
+      scaffold.replaceContentWithColumns(cell);
 
       //Assert
       var childCells = column.getChildCells();
@@ -450,15 +450,15 @@ describe('Scaffold', function() {
       
     });
 	  
-    it('should replace the block with columns and put the block in the right column', function() {
+    it('should replace the content with columns and put the content in the right column', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var cell = scaffold.createBlockCell({"id": 1});
+      var cell = scaffold.createContentCell({"id": 1});
       var column = scaffold.createColumn(8, [cell]);
         
       //Act
-      scaffold.replaceBlockWithColumns(cell, true);
+      scaffold.replaceContentWithColumns(cell, true);
 
       //Assert
       var childCells = column.getChildCells();

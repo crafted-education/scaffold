@@ -1,26 +1,26 @@
 var assert = require("assert");
 var Scaffold = require('../lib/Scaffold.js');
-var BlockCell = require('../lib/BlockCell.js');
+var ContentCell = require('../lib/ContentCell.js');
 var ColumnGroupCell = require('../lib/ColumnGroupCell.js');
 var Column = require('../lib/Column.js');
 
 
-describe('BlockCell', function() {
+describe('ContentCell', function() {
 
-  describe('deleteCell', function() {
+  describe('delete', function() {
 	  
     it('should delete the cell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columnACells = [
-        scaffold.createBlockCell({"id": 1}),
-        scaffold.createBlockCell({"id": 2})
+        scaffold.createContentCell({"id": 1}),
+        scaffold.createContentCell({"id": 2})
       ];
       var columnA = scaffold.createColumn(6, columnACells);
       var columnBCells = [
-        scaffold.createBlockCell({"id": 3}),
-        scaffold.createBlockCell({"id": 4})
+        scaffold.createContentCell({"id": 3}),
+        scaffold.createContentCell({"id": 4})
       ];
       var columnB = scaffold.createColumn(6, columnBCells);
       
@@ -31,10 +31,10 @@ describe('BlockCell', function() {
       assert(scaffold.getCellById(cell.getId()));
       assert(scaffold.getColumnById(columnA.getId()));
       assert(scaffold.getColumnById(columnB.getId()));
-      assert(scaffold.getCellByBlockId(1));
-      assert(scaffold.getCellByBlockId(2));
-      assert(scaffold.getCellByBlockId(3));
-      assert(scaffold.getCellByBlockId(4));
+      assert(scaffold.getCellByContentId(1));
+      assert(scaffold.getCellByContentId(2));
+      assert(scaffold.getCellByContentId(3));
+      assert(scaffold.getCellByContentId(4));
 
       
       //Act
@@ -44,15 +44,15 @@ describe('BlockCell', function() {
       assert(scaffold.getCellById(cell.getId()));
       assert(scaffold.getColumnById(columnA.getId()));
       assert(scaffold.getColumnById(columnB.getId()));
-      assert(!scaffold.getCellByBlockId(1));
-      assert(scaffold.getCellByBlockId(2));
-      assert(scaffold.getCellByBlockId(3));
-      assert(scaffold.getCellByBlockId(4));
+      assert(!scaffold.getCellByContentId(1));
+      assert(scaffold.getCellByContentId(2));
+      assert(scaffold.getCellByContentId(3));
+      assert(scaffold.getCellByContentId(4));
       //Make sure that the cell was removed from it's parent
       var childCells = columnA.getChildCells();
       assert.strictEqual(childCells.length, 1);
       assert(childCells[0]);
-      assert.strictEqual(childCells[0].getChildBlock().id, 2);
+      assert.strictEqual(childCells[0].getChildContent().id, 2);
     });
     
     it('should delete the cell and the grandparent column group cell when it has no more grandchildren', function() {
@@ -60,7 +60,7 @@ describe('BlockCell', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columnACells = [
-        scaffold.createBlockCell({"id": 1})];
+        scaffold.createContentCell({"id": 1})];
       var columnA = scaffold.createColumn(6, columnACells);
       var columnBCells = [];
       var columnB = scaffold.createColumn(6, columnBCells);
@@ -72,7 +72,7 @@ describe('BlockCell', function() {
       assert(scaffold.getCellById(cell.getId()));
       assert(scaffold.getColumnById(columnA.getId()));
       assert(scaffold.getColumnById(columnB.getId()));
-      assert(scaffold.getCellByBlockId(1));
+      assert(scaffold.getCellByContentId(1));
       
       //Act
       columnACells[0].delete();
@@ -81,7 +81,7 @@ describe('BlockCell', function() {
       assert(!scaffold.getCellById(cell.getId()));
       assert(!scaffold.getColumnById(columnA.getId()));
       assert(!scaffold.getColumnById(columnB.getId()));
-      assert(!scaffold.getCellByBlockId(1));
+      assert(!scaffold.getCellByContentId(1));
     });
 
   });
@@ -94,7 +94,7 @@ describe('BlockCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var cell = scaffold.createBlockCell({"id": 1});
+      var cell = scaffold.createContentCell({"id": 1});
       var column = scaffold.createColumn(8, [cell]);
         
       //Act
@@ -112,7 +112,7 @@ describe('BlockCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var cell = scaffold.createBlockCell({"id": 1});
+      var cell = scaffold.createContentCell({"id": 1});
       var root = scaffold.getRootColumn();
       root.addChildCell(cell);
             
@@ -132,7 +132,7 @@ describe('BlockCell', function() {
 
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var cell = scaffold.createBlockCell({"id": 1});
+      var cell = scaffold.createContentCell({"id": 1});
       var column = scaffold.createColumn(4, [cell]);
 
       //Act

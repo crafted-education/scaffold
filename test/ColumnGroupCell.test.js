@@ -1,6 +1,6 @@
 var assert = require("assert");
 var Scaffold = require('../lib/Scaffold.js');
-var BlockCell = require('../lib/BlockCell.js');
+var ContentCell = require('../lib/ContentCell.js');
 var ColumnGroupCell = require('../lib/ColumnGroupCell.js');
 var Column = require('../lib/Column.js');
 
@@ -14,13 +14,13 @@ describe('ColumnGroupCell', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columnACells = [
-        scaffold.createBlockCell({"id": 1}),
-        scaffold.createBlockCell({"id": 2})
+        scaffold.createContentCell({"id": 1}),
+        scaffold.createContentCell({"id": 2})
       ];
       var columnA = scaffold.createColumn(6, columnACells);
       var columnBCells = [
-        scaffold.createBlockCell({"id": 3}),
-        scaffold.createBlockCell({"id": 4})
+        scaffold.createContentCell({"id": 3}),
+        scaffold.createContentCell({"id": 4})
       ];
       var columnB = scaffold.createColumn(6, columnBCells);
       
@@ -31,10 +31,10 @@ describe('ColumnGroupCell', function() {
       assert(scaffold.getCellById(cell.getId()));
       assert(scaffold.getColumnById(columnA.getId()));
       assert(scaffold.getColumnById(columnB.getId()));
-      assert(scaffold.getCellByBlockId(1));
-      assert(scaffold.getCellByBlockId(2));
-      assert(scaffold.getCellByBlockId(3));
-      assert(scaffold.getCellByBlockId(4));
+      assert(scaffold.getCellByContentId(1));
+      assert(scaffold.getCellByContentId(2));
+      assert(scaffold.getCellByContentId(3));
+      assert(scaffold.getCellByContentId(4));
 
       
       //Act
@@ -44,10 +44,10 @@ describe('ColumnGroupCell', function() {
       assert(!scaffold.getCellById(cell.getId()));
       assert(!scaffold.getColumnById(columnA.getId()));
       assert(!scaffold.getColumnById(columnB.getId()));
-      assert(!scaffold.getCellByBlockId(1));
-      assert(!scaffold.getCellByBlockId(2));
-      assert(!scaffold.getCellByBlockId(3));
-      assert(!scaffold.getCellByBlockId(4));
+      assert(!scaffold.getCellByContentId(1));
+      assert(!scaffold.getCellByContentId(2));
+      assert(!scaffold.getCellByContentId(3));
+      assert(!scaffold.getCellByContentId(4));
       
     });
     
@@ -61,11 +61,11 @@ describe('ColumnGroupCell', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columns = [
-        scaffold.createColumn(8, [scaffold.createBlockCell({id: 1})]),
-        scaffold.createColumn(4, [scaffold.createBlockCell({id: 2})])
+        scaffold.createColumn(8, [scaffold.createContentCell({id: 1})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({id: 2})])
       ];
       var cell = scaffold.createColumnGroupCell(columns);
-      var newColumn = scaffold.createColumn(12, [scaffold.createBlockCell({id: 3})]);
+      var newColumn = scaffold.createColumn(12, [scaffold.createContentCell({id: 3})]);
       
       var columnId1 = columns[0].getId();
       var columnId2 = columns[1].getId();
@@ -92,11 +92,11 @@ describe('ColumnGroupCell', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columns = [
-        scaffold.createColumn(8, [scaffold.createBlockCell({id: 1})]),
-        scaffold.createColumn(4, [scaffold.createBlockCell({id: 2})])
+        scaffold.createColumn(8, [scaffold.createContentCell({id: 1})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({id: 2})])
       ];
       var cell = scaffold.createColumnGroupCell(columns);
-      var newColumn = scaffold.createColumn(12, [scaffold.createBlockCell({id: 3})]);
+      var newColumn = scaffold.createColumn(12, [scaffold.createContentCell({id: 3})]);
       
       var columnId1 = columns[0].getId();
       var columnId2 = columns[1].getId();
@@ -123,11 +123,11 @@ describe('ColumnGroupCell', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columns = [
-        scaffold.createColumn(8, [scaffold.createBlockCell({id: 1})]),
-        scaffold.createColumn(4, [scaffold.createBlockCell({id: 2})])
+        scaffold.createColumn(8, [scaffold.createContentCell({id: 1})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({id: 2})])
       ];
       var cell = scaffold.createColumnGroupCell(columns);
-      var newColumn = scaffold.createColumn(12, [scaffold.createBlockCell({id: 3})]);
+      var newColumn = scaffold.createColumn(12, [scaffold.createContentCell({id: 3})]);
       
       var columnId1 = columns[0].getId();
       var columnId2 = columns[1].getId();
@@ -153,11 +153,11 @@ describe('ColumnGroupCell', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columns = [
-        scaffold.createColumn(8, [scaffold.createBlockCell({id: 1})]),
-        scaffold.createColumn(4, [scaffold.createBlockCell({id: 2})])
+        scaffold.createColumn(8, [scaffold.createContentCell({id: 1})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({id: 2})])
       ];
       var cell = scaffold.createColumnGroupCell(columns);
-      var newColumn = scaffold.createColumn(12, [scaffold.createBlockCell({id: 3})]);
+      var newColumn = scaffold.createColumn(12, [scaffold.createContentCell({id: 3})]);
       
       var columnId1 = columns[0].getId();
       var columnId2 = columns[1].getId();
@@ -183,11 +183,11 @@ describe('ColumnGroupCell', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columns = [
-        scaffold.createColumn(4, [scaffold.createBlockCell({id: 1})]),
-        scaffold.createColumn(8, [scaffold.createBlockCell({id: 2})])
+        scaffold.createColumn(4, [scaffold.createContentCell({id: 1})]),
+        scaffold.createColumn(8, [scaffold.createContentCell({id: 2})])
       ];
       var cell = scaffold.createColumnGroupCell(columns);
-      var newColumn = scaffold.createColumn(12, [scaffold.createBlockCell({id: 3})]);
+      var newColumn = scaffold.createColumn(12, [scaffold.createContentCell({id: 3})]);
       
       var columnId1 = columns[0].getId();
       var columnId2 = columns[1].getId();
@@ -213,11 +213,11 @@ describe('ColumnGroupCell', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columns = [
-        scaffold.createColumn(6, [scaffold.createBlockCell({id: 1})]),
-        scaffold.createColumn(6, [scaffold.createBlockCell({id: 2})])
+        scaffold.createColumn(6, [scaffold.createContentCell({id: 1})]),
+        scaffold.createColumn(6, [scaffold.createContentCell({id: 2})])
       ];
       var cell = scaffold.createColumnGroupCell(columns);
-      var newColumn = scaffold.createColumn(12, [scaffold.createBlockCell({id: 3})]);
+      var newColumn = scaffold.createColumn(12, [scaffold.createContentCell({id: 3})]);
       
       var columnId1 = columns[0].getId();
       var columnId2 = columns[1].getId();
@@ -248,9 +248,9 @@ describe('ColumnGroupCell', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columns = [
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id":1})]),
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id":2})]),
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id":3})])
+        scaffold.createColumn(4, [scaffold.createContentCell({"id":1})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({"id":2})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({"id":3})])
       ];
       var cell = scaffold.createColumnGroupCell(columns);
      
@@ -276,9 +276,9 @@ describe('ColumnGroupCell', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columns = [
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id":1})]),
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id":2})]),
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id":3})])
+        scaffold.createColumn(4, [scaffold.createContentCell({"id":1})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({"id":2})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({"id":3})])
       ];
       var cell = scaffold.createColumnGroupCell(columns);
      
@@ -304,9 +304,9 @@ describe('ColumnGroupCell', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columns = [
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id":1})]),
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id":2})]),
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id":3})])
+        scaffold.createColumn(4, [scaffold.createContentCell({"id":1})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({"id":2})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({"id":3})])
       ];
       var cell = scaffold.createColumnGroupCell(columns);
      
@@ -332,9 +332,9 @@ describe('ColumnGroupCell', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columns = [
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id":1})]),
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id":2})]),
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id":3})])
+        scaffold.createColumn(4, [scaffold.createContentCell({"id":1})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({"id":2})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({"id":3})])
       ];
       var otherColumn = scaffold.createColumn(4, []);
       var cell = scaffold.createColumnGroupCell(columns);
@@ -367,14 +367,14 @@ describe('ColumnGroupCell', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columns = [
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id":1})]),
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id":2})])
+        scaffold.createColumn(4, [scaffold.createContentCell({"id":1})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({"id":2})])
       ];
       var cell = scaffold.createColumnGroupCell(columns);
       var parentColumn = scaffold.createColumn(4, [
-        scaffold.createBlockCell({"id":3}),
+        scaffold.createContentCell({"id":3}),
         cell,
-        scaffold.createBlockCell({"id":4})
+        scaffold.createContentCell({"id":4})
       ]);
      
       var columnId1 = columns[0].getId();
@@ -389,9 +389,9 @@ describe('ColumnGroupCell', function() {
       assert(!scaffold.getCellById(cell.getId())); //Should be deleted
       assert(!scaffold.getColumnById(columnId1)); //Should be deleted
       assert.strictEqual(cells.length, 3);
-      assert.strictEqual(cells[0].getChildBlock().id, 3);
-      assert.strictEqual(cells[1].getChildBlock().id, 1);
-      assert.strictEqual(cells[2].getChildBlock().id, 4);
+      assert.strictEqual(cells[0].getChildContent().id, 3);
+      assert.strictEqual(cells[1].getChildContent().id, 1);
+      assert.strictEqual(cells[2].getChildContent().id, 4);
     });
 
     it('should delete itself if it is empty after removing the column', function() {
@@ -401,14 +401,14 @@ describe('ColumnGroupCell', function() {
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columns = [
-        scaffold.createColumn(4, [scaffold.createBlockCell({"id":1})]),
+        scaffold.createColumn(4, [scaffold.createContentCell({"id":1})]),
         scaffold.createColumn(4, [])
       ];
       var cell = scaffold.createColumnGroupCell(columns);
       var parentColumn = scaffold.createColumn(4, [
-        scaffold.createBlockCell({"id":2}),
+        scaffold.createContentCell({"id":2}),
         cell,
-        scaffold.createBlockCell({"id":3})
+        scaffold.createContentCell({"id":3})
       ]);
      
       var columnId2 = columns[1].getId();
@@ -422,8 +422,8 @@ describe('ColumnGroupCell', function() {
       assert(!scaffold.getCellById(cell.getId())); //Should be deleted
       assert(!scaffold.getColumnById(columnId2)); //Should be deleted
       assert.strictEqual(cells.length, 2);
-      assert.strictEqual(cells[0].getChildBlock().id, 2);
-      assert.strictEqual(cells[1].getChildBlock().id, 3);
+      assert.strictEqual(cells[0].getChildContent().id, 2);
+      assert.strictEqual(cells[1].getChildContent().id, 3);
     });
   });
 
@@ -434,8 +434,8 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(8, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 1})]);
+      var columnA = scaffold.createColumn(8, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(4, [scaffold.createContentCell({"id": 1})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
         
       //Act
@@ -452,8 +452,8 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(6, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(6, [scaffold.createBlockCell({"id": 1})]);
+      var columnA = scaffold.createColumn(6, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(6, [scaffold.createContentCell({"id": 1})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
         
       //Act
@@ -470,8 +470,8 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 1})]);
+      var columnA = scaffold.createColumn(4, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(4, [scaffold.createContentCell({"id": 1})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
         
       //Act
@@ -487,9 +487,9 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 1})]);
-      var columnC = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 1})]);
+      var columnA = scaffold.createColumn(4, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(4, [scaffold.createContentCell({"id": 1})]);
+      var columnC = scaffold.createColumn(4, [scaffold.createContentCell({"id": 1})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB, columnC]);
         
       //Act
@@ -508,8 +508,8 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(8, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 2})]);
+      var columnA = scaffold.createColumn(8, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(4, [scaffold.createContentCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
         
       //Act
@@ -523,8 +523,8 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(6, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(6, [scaffold.createBlockCell({"id": 2})]);
+      var columnA = scaffold.createColumn(6, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(6, [scaffold.createContentCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
         
       //Act
@@ -538,8 +538,8 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(8, [scaffold.createBlockCell({"id": 2})]);
+      var columnA = scaffold.createColumn(4, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(8, [scaffold.createContentCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
         
       //Act
@@ -553,8 +553,8 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 2})]);
+      var columnA = scaffold.createColumn(4, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(4, [scaffold.createContentCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
         
       //Act
@@ -572,15 +572,15 @@ describe('ColumnGroupCell', function() {
           scaffold.createColumn(8, [
             scaffold.createColumnGroupCell([
               scaffold.createColumn(4, [
-                scaffold.createBlockCell({"id": 1})
+                scaffold.createContentCell({"id": 1})
               ]),
               scaffold.createColumn(4, [
-                scaffold.createBlockCell({"id": 2})
+                scaffold.createContentCell({"id": 2})
               ])
             ])
           ]),
           scaffold.createColumn(4, [
-            scaffold.createBlockCell({"id": 3})
+            scaffold.createContentCell({"id": 3})
           ])
         ]);
         
@@ -599,8 +599,8 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(8, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 2})]);
+      var columnA = scaffold.createColumn(8, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(4, [scaffold.createContentCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
         
       //Act
@@ -618,15 +618,15 @@ describe('ColumnGroupCell', function() {
           scaffold.createColumn(8, [
             scaffold.createColumnGroupCell([
               scaffold.createColumn(4, [
-                scaffold.createBlockCell({"id": 1})
+                scaffold.createContentCell({"id": 1})
               ]),
               scaffold.createColumn(4, [
-                scaffold.createBlockCell({"id": 2})
+                scaffold.createContentCell({"id": 2})
               ])
             ])
           ]),
           scaffold.createColumn(4, [
-            scaffold.createBlockCell({"id": 3})
+            scaffold.createContentCell({"id": 3})
           ])
         ]);
         
@@ -643,13 +643,13 @@ describe('ColumnGroupCell', function() {
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var cell = scaffold.createColumnGroupCell([
           scaffold.createColumn(4, [
-            scaffold.createBlockCell({"id": 3})
+            scaffold.createContentCell({"id": 3})
           ]),
           scaffold.createColumn(4, [
-            scaffold.createBlockCell({"id": 3})
+            scaffold.createContentCell({"id": 3})
           ]),
           scaffold.createColumn(4, [
-            scaffold.createBlockCell({"id": 3})
+            scaffold.createContentCell({"id": 3})
           ])
         ]);
         
@@ -666,10 +666,10 @@ describe('ColumnGroupCell', function() {
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var cell = scaffold.createColumnGroupCell([
            scaffold.createColumn(6, [
-            scaffold.createBlockCell({"id": 3})
+            scaffold.createContentCell({"id": 3})
           ]),
           scaffold.createColumn(6, [
-            scaffold.createBlockCell({"id": 3})
+            scaffold.createContentCell({"id": 3})
           ])
         ]);
         
@@ -691,13 +691,13 @@ describe('ColumnGroupCell', function() {
           scaffold.createColumn(8, [
             scaffold.createColumnGroupCell([
               scaffold.createColumn(4, [
-                scaffold.createBlockCell({"id": 1})
+                scaffold.createContentCell({"id": 1})
               ]),
               scaffold.createColumn(4, [])
             ])
           ]),
           scaffold.createColumn(4, [
-            scaffold.createBlockCell({"id": 3})
+            scaffold.createContentCell({"id": 3})
           ])
         ]);
         
@@ -712,12 +712,12 @@ describe('ColumnGroupCell', function() {
   
   describe('isEmpty', function() {
 	  
-    it('should return false if a column has a block cell', function() {
+    it('should return false if a column has a content cell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
       var columnA = scaffold.createColumn(8, []);
-      var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 2})]);
+      var columnB = scaffold.createColumn(4, [scaffold.createContentCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
         
       //Act
@@ -727,7 +727,7 @@ describe('ColumnGroupCell', function() {
       assert(!isEmpty);
     });
 	  
-    it('should return false if a column has a block cell', function() {
+    it('should return false if a column has a content cell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
@@ -742,7 +742,7 @@ describe('ColumnGroupCell', function() {
       assert(isEmpty);
     });
 	  
-    it('should return false if a sub-column has a block cell', function() {
+    it('should return false if a sub-column has a content cell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
@@ -751,7 +751,7 @@ describe('ColumnGroupCell', function() {
             scaffold.createColumnGroupCell([
               scaffold.createColumn(4, []),
               scaffold.createColumn(4, [
-                scaffold.createBlockCell({"id": 2})
+                scaffold.createContentCell({"id": 2})
               ])
             ])
           ]),
@@ -765,7 +765,7 @@ describe('ColumnGroupCell', function() {
       assert(!isEmpty);
     });
 
-    it('should return true if no column or sub-column has a block cell', function() {
+    it('should return true if no column or sub-column has a content cell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
@@ -794,8 +794,8 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(8, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 2})]);
+      var columnA = scaffold.createColumn(8, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(4, [scaffold.createContentCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
         
       //Act
@@ -816,8 +816,8 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(8, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 2})]);
+      var columnA = scaffold.createColumn(8, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(4, [scaffold.createContentCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
         
       //Act
@@ -833,14 +833,14 @@ describe('ColumnGroupCell', function() {
 
   describe('resizeColumnsForNewColumn', function() {
 	  
-    it('should size the cells appropriately for a new column with a block cell', function() {
+    it('should size the cells appropriately for a new column with a content cell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(8, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 2})]);
+      var columnA = scaffold.createColumn(8, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(4, [scaffold.createContentCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
-      var newColumn = scaffold.createColumn(12, [scaffold.createBlockCell({"id": 3})]);
+      var newColumn = scaffold.createColumn(12, [scaffold.createContentCell({"id": 3})]);
         
       //Act
       cell.resizeColumnsForNewColumn(newColumn, 1);
@@ -855,8 +855,8 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(8, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 2})]);
+      var columnA = scaffold.createColumn(8, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(4, [scaffold.createContentCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
       var newColumn = scaffold.createColumn(12, []);
         
@@ -873,10 +873,10 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 2})]);
+      var columnA = scaffold.createColumn(4, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(4, [scaffold.createContentCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
-      var newColumn = scaffold.createColumn(12, [scaffold.createBlockCell({"id": 3})]);
+      var newColumn = scaffold.createColumn(12, [scaffold.createContentCell({"id": 3})]);
 
       //Assert
       assert.throws(function() {
@@ -892,8 +892,8 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 2})]);
+      var columnA = scaffold.createColumn(4, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(4, [scaffold.createContentCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
         
       //Act
@@ -908,8 +908,8 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(8, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 2})]);
+      var columnA = scaffold.createColumn(8, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(4, [scaffold.createContentCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
         
       //Act
@@ -924,8 +924,8 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(8, [scaffold.createBlockCell({"id": 2})]);
+      var columnA = scaffold.createColumn(4, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(8, [scaffold.createContentCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
         
       //Act
@@ -940,8 +940,8 @@ describe('ColumnGroupCell', function() {
       
       //Arrange
       var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
-      var columnA = scaffold.createColumn(4, [scaffold.createBlockCell({"id": 1})]);
-      var columnB = scaffold.createColumn(8, [scaffold.createBlockCell({"id": 2})]);
+      var columnA = scaffold.createColumn(4, [scaffold.createContentCell({"id": 1})]);
+      var columnB = scaffold.createColumn(8, [scaffold.createContentCell({"id": 2})]);
       var cell = scaffold.createColumnGroupCell([columnA, columnB]);
 
       //Assert

@@ -1,0 +1,1 @@
+Scaffold provides a grid to hold your content.
