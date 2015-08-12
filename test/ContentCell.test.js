@@ -145,4 +145,42 @@ describe('ContentCell', function() {
     });
   });
 
+  describe('getPreviousSibling()', function() {
+
+    it('should return the right cell', function() {
+      
+      //Arrange
+      var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
+      var cell1 = scaffold.createContentCell({"id": 1});
+      var cell2 = scaffold.createContentCell({"id": 2});
+      var cell3 = scaffold.createContentCell({"id": 3});
+      var column = scaffold.createColumn(8, [cell1, cell2, cell3]);
+
+      //Act
+      var previousCell = cell2.getPreviousSibling();
+
+      //Assert
+      assert(previousCell);
+      assert.strictEqual(previousCell, cell1);
+
+    });
+
+    it('should return null if there is no previous cell', function() {
+      
+      //Arrange
+      var scaffold = new Scaffold({ "width": 12, validSizes: [12, 8, 6, 4]});
+      var cell1 = scaffold.createContentCell({"id": 1});
+      var cell2 = scaffold.createContentCell({"id": 2});
+      var cell3 = scaffold.createContentCell({"id": 3});
+      var column = scaffold.createColumn(8, [cell1, cell2, cell3]);
+        
+      //Act
+      var previousCell = cell1.getPreviousSibling();
+
+      //Assert
+      assert.strictEqual(previousCell, null);
+
+    });
+
+	});
 });
